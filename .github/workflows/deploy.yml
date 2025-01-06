@@ -9,6 +9,9 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
 
+    permissions:
+      contents: write  # Nécessaire pour écrire dans le dépôt
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -17,4 +20,5 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./
+          publish_dir: ./  # Remplacez par le chemin du dossier à publier
+          publish_branch: gh-pages  # La branche de publication cible
