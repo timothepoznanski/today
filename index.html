@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Todo List</title>
+  <title>Today-List</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -14,22 +14,10 @@
       color: #333;
     }
     input[type="text"] {
-      width: calc(100% - 80px);
+      width: calc(100% - 20px);
       padding: 10px;
-      margin-right: 10px;
       border: 1px solid #ccc;
       border-radius: 5px;
-    }
-    button {
-      padding: 10px 15px;
-      background-color: #28a745;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-    button:hover {
-      background-color: #218838;
     }
     ul {
       list-style-type: none;
@@ -46,6 +34,11 @@
     }
     li button {
       background-color: #dc3545;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      padding: 5px 10px;
+      cursor: pointer;
     }
     li button:hover {
       background-color: #c82333;
@@ -53,11 +46,60 @@
   </style>
 </head>
 <body>
-  <h1>Todo List</h1>
+  <h1>Today-List</h1>
   <input type="text" id="new-task" placeholder="Enter a new task">
-  <button id="add-task">Add</button>
   <ul id="tasks"></ul>
 
-  <script src="app.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const taskInput = document.getElementById('new-task');
+      const taskList = document.getElementById('tasks');
+
+      const loadTasks = () => {
+        const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+        taskList.innerHTML = '';
+        tasks.forEach((task, index) => {
+          const li = document.createElement('li');
+          li.textContent = task;
+          const deleteButton = document.createElement('button');
+          deleteButton.textContent = 'Delete';
+          deleteButton.addEventListener('click', () => {
+            removeTask(index);
+          });
+          li.appendChild(deleteButton);
+          taskList.appendChild(li);
+        });
+      };
+
+      const saveTasks = (tasks) => {
+        localStorage.setItem('tasks', JSON.stringify(tasks));
+        loadTasks();
+      };
+
+      const addTask = () => {
+        const task = taskInput.value.trim();
+        if (task) {
+          const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+          tasks.push(task);
+          saveTasks(tasks);
+          taskInput.value = '';
+        }
+      };
+
+      const removeTask = (index) => {
+        const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+        tasks.splice(index, 1);
+        saveTasks(tasks);
+      };
+
+      taskInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+          addTask();
+        }
+      });
+
+      loadTasks();
+    });
+  </script>
 </body>
 </html>
