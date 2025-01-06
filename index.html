@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Todaylist</title>
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <style>
+    .centered-content {
+    width: 50%;
+    margin: 0 auto;
+    text-align: center;
+        }
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background-color: #f4f4f9;
+    }
+    h1 {
+      color: #333;
+    }
+    input[type="text"] {
+      width: calc(100% - 20px);
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+    li {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px;
+      background: white;
+      border: 1px solid #ddd;
+      margin-top: 10px;
+      border-radius: 5px;
+    }
+    li button {
+      background-color: #dc3545;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      padding: 5px 10px;
+      cursor: pointer;
+    }
+    li button:hover {
+      background-color: #c82333;
+    }
+  </style>
+</head>
+<body>
+  <div class="centered-content">
+    <!-- <h1>Todaylist</h1> -->
+    <input type="text" id="new-task" placeholder="Enter a new task">
+    <ul id="tasks"></ul>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const taskInput = document.getElementById('new-task');
+        const taskList = document.getElementById('tasks');
+
+        const loadTasks = () => {
+          const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+          taskList.innerHTML = '';
+          tasks.forEach((task, index) => {
+            const li = document.createElement('li');
+            li.textContent = task;
+            const deleteButton = document.createElement('button');
+            deleteButton.textContent = 'Delete';
+            deleteButton.addEventListener('click', () => {
+              removeTask(index);
+            });
+            li.appendChild(deleteButton);
+            taskList.appendChild(li);
+          });
+        };
+
+        const saveTasks = (tasks) => {
+          localStorage.setItem('tasks', JSON.stringify(tasks));
+          loadTasks();
+        };
+
+        const addTask = () => {
+          const task = taskInput.value.trim();
+          if (task) {
+            const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+            tasks.push(task);
+            saveTasks(tasks);
+            taskInput.value = '';
+          }
+        };
+
+        const removeTask = (index) => {
+          const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+          tasks.splice(index, 1);
+          saveTasks(tasks);
+        };
+
+        taskInput.addEventListener('keypress', (e) => {
+          if (e.key === 'Enter') {
+            addTask();
+          }
+        });
+
+        loadTasks();
+      });
+    </script>
+  </div>
+</body>
+</html>
