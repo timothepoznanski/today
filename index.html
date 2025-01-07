@@ -7,7 +7,7 @@
   <link rel="icon" href="favicon.ico" type="image/x-icon">
   <style>
     .centered-content {
-    width: 70%;
+    width: 50%;
     margin: 0 auto;
     text-align: center;
         }
@@ -38,7 +38,6 @@
       border: 1px solid #ddd;
       margin-top: 10px;
       border-radius: 5px;
-      word-break: break-word;
     }
     li button {
       background-color: #dc3545;
@@ -47,8 +46,6 @@
       border-radius: 5px;
       padding: 5px 10px;
       cursor: pointer;
-      margin-left: 10px;
-      flex-shrink: 0;
     }
     li button:hover {
       background-color: #c82333;
@@ -58,7 +55,7 @@
 <body>
   <div class="centered-content">
     <!-- <h1>Todaylist</h1> -->
-    <input type="text" id="new-task" placeholder="Enter a new task and press Enter...">
+    <input type="text" id="new-task" placeholder="Enter a new task">
     <ul id="tasks"></ul>
 
     <script>
