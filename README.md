@@ -1,6 +1,6 @@
 # Today
 
-A simple web application to replace your daily task post-its 📝
+A simple web application to replace daily task post-its 📝
 
 Keep track of your tasks privately, everything is stored in your browser's local cache.
 
