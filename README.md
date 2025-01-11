@@ -1,7 +1,9 @@
 # Today
 
-Simple web application to replace your daily task post-its 📝
+A simple web application to replace your daily task post-its 📝
 
-Your tasks are known only to you, as they are stored in your browser's local cache.
+Keep track of your tasks privately, everything is stored in your browser's local cache.
 
-Use it freely here -> https://today.timpoz.com
+Use it out for free here 👉 https://today.timpoz.com
+
+Want to make it your own? Fork the project and set up your personalized website on GitHub Pages!
