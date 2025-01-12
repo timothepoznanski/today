@@ -13,6 +13,12 @@ jobs:
       contents: write
 
     steps:
+
+      - name: Prepare files for deployment
+        run: |
+          mkdir dist
+          cp index.html app.js favicon.ico dist/
+
       - name: Checkout code
         uses: actions/checkout@v3
 
