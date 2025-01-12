@@ -14,13 +14,13 @@ jobs:
 
     steps:
 
+      - name: Checkout code
+        uses: actions/checkout@v3
+
       - name: Prepare files for deployment
         run: |
           mkdir dist
           cp index.html app.js favicon.ico dist/
-
-      - name: Checkout code
-        uses: actions/checkout@v3
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
